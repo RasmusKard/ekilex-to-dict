@@ -1,20 +1,27 @@
-package com.converter;
+package com.converter.classes;
 
 import java.util.List;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 public class DefinitionBlock {
+    @JacksonXmlProperty(localName = "gr")
     private String wordType;
 
+    @JacksonXmlProperty(localName = "deftext")
     private String meaning;
 
-    private List<String> examples;
+    @JacksonXmlElementWrapper(localName = "ex")
+    @JacksonXmlProperty(localName = "ex_orig")
+    private List<String> usages;
 
-    public List<String> getExamples() {
-        return examples;
+    public List<String> getUsages() {
+        return usages;
     }
 
-    public void setExamples(List<String> examples) {
-        this.examples = examples;
+    public void setUsages(List<String> usages) {
+        this.usages = usages;
     }
 
     public String getMeaning() {
