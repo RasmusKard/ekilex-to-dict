@@ -22,6 +22,7 @@ public class Article {
     @JacksonXmlProperty(localName = "def")
     private List<DefinitionBlock> definitionBlocks;
 
+    // @JacksonXmlProperty(localName = "k")
     private String wordValue;
 
     @JacksonXmlElementWrapper(useWrapping = false)
