@@ -1,6 +1,5 @@
 package com.converter.classes;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import com.converter.util.WordDetailsToArticles;
 import com.eki.dict.classes.Classifier;
 import com.eki.dict.classes.Form;
 import com.eki.dict.classes.Paradigm;
@@ -69,20 +67,9 @@ public class DictionaryCreator {
     public void createDictionary() {
 
         try {
-            // ObjectMapper objectMapper = new ObjectMapper();
-            // Object a = objectMapper.readValue(jsonfile, Object.class);
-            // System.out.println(a);
-            // Stream<WordDetails> articles =
-            // Files.list(this.jsonFilesDirPath).filter(Files::isRegularFile).map(path -> {
-            // return objectMapper.readValue(path.toFile(), WordDetails.class);
-            // });
 
             Stream<Article> articles = createArticleStreamfromWordDetailsStream(this.wordDetailStream);
             this.dictionary.setArticles(articles);
-
-            // WordDetails wordDetails = objectMapper.readValue(jsonfile,
-            // WordDetails.class);
-            // Article article = WordDetailsToArticles.main(wordDetails);
 
             ObjectMapper xmlMapper = new XmlMapper().registerModule(new Jdk8Module());
             String prettyJson = xmlMapper
