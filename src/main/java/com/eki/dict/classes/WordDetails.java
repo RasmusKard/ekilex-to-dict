@@ -2,6 +2,9 @@ package com.eki.dict.classes;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
+@JsonIncludeProperties({ "word", "lexemes" })
 public class WordDetails extends AbstractDataObject {
 
 	private static final long serialVersionUID = 1L;

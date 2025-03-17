@@ -2,6 +2,9 @@ package com.eki.dict.classes;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
+@JsonIncludeProperties({ "pos", "meaning", "usages" })
 public class WordLexeme extends AbstractCrudEntity implements LexemeLevel, DecoratedWordType, LexemeTag {
 
 	private static final long serialVersionUID = 1L;

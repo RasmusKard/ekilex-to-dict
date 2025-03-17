@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -88,17 +89,25 @@ public class DictionaryCreator {
             String wordValue = word.getWordValue();
 
             Set<String> formValues = new HashSet<>();
-            for (Paradigm paradigm : word.getParadigms()) {
-                for (Form form : paradigm.getForms()) {
-                    formValues.add(form.getValue());
+            if (word.getParadigms() != null) {
+                for (Paradigm paradigm : word.getParadigms()) {
+                    for (Form form : paradigm.getForms()) {
+                        formValues.add(form.getValue());
+                    }
                 }
             }
 
             List<DefinitionBlock> definitionBlocks = new ArrayList<DefinitionBlock>();
             for (WordLexeme lexeme : wordDetail.getLexemes()) {
-                List<Classifier> pos = lexeme.getPos();
-                String wordType = pos == null || pos.isEmpty() ? null : pos.get(0).getValue();
-                String meaningValue = lexeme.getMeaning().getDefinitions().get(0).getValue();
+                String wordType = Optional.ofNullable(lexeme.getPos()).filter(pos -> !pos.isEmpty())
+                        .map(pos -> pos.get(0)).map(pos -> pos.getValue()).orElse(null);
+
+                String meaningValue = Optional.ofNullable(lexeme.getMeaning())
+                        .map(meaning -> meaning.getDefinitions())
+                        .filter(definitions -> !definitions.isEmpty())
+                        .map(definitions -> definitions.get(0))
+                        .map(definition -> definition.getValue())
+                        .orElse(null);
 
                 List<String> usages = new ArrayList<String>();
                 for (Usage usage : lexeme.getUsages()) {

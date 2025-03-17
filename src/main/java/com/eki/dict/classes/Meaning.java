@@ -3,6 +3,9 @@ package com.eki.dict.classes;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
+@JsonIncludeProperties({ "definitions" })
 public class Meaning extends AbstractCrudEntity {
 
 	private static final long serialVersionUID = 1L;
