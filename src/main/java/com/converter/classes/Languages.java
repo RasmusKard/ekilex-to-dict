@@ -1,34 +1,29 @@
 package com.converter.classes;
 
-import java.util.List;
-
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class Languages {
 
-    @JacksonXmlElementWrapper(localName = "from", useWrapping = false)
-    @JacksonXmlProperty(localName = "lang")
-    private List<String> fromLanguages;
+    @JacksonXmlProperty(localName = "from")
+    private FromLanguage fromLanguage;
 
-    @JacksonXmlElementWrapper(localName = "to", useWrapping = false)
-    @JacksonXmlProperty(localName = "lang")
-    private List<String> toLanguages;
+    @JacksonXmlProperty(localName = "to")
+    private ToLanguage toLanguage;
 
-    public List<String> getFromLanguages() {
-        return fromLanguages;
+    public FromLanguage getFromLanguage() {
+        return fromLanguage;
     }
 
-    public void setFromLanguages(List<String> fromLanguages) {
-        this.fromLanguages = fromLanguages;
+    public void setFromLanguage(FromLanguage fromLanguage) {
+        this.fromLanguage = fromLanguage;
     }
 
-    public List<String> getToLanguages() {
-        return toLanguages;
+    public ToLanguage getToLanguage() {
+        return toLanguage;
     }
 
-    public void setToLanguages(List<String> toLanguages) {
-        this.toLanguages = toLanguages;
+    public void setToLanguage(ToLanguage toLanguage) {
+        this.toLanguage = toLanguage;
     }
 
 }

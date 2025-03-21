@@ -1,5 +1,6 @@
 package com.converter.classes;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
@@ -19,7 +20,11 @@ import com.eki.dict.classes.Usage;
 import com.eki.dict.classes.Word;
 import com.eki.dict.classes.WordDetails;
 import com.eki.dict.classes.WordLexeme;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 
@@ -72,11 +77,28 @@ public class DictionaryCreator {
             Stream<Article> articles = createArticleStreamfromWordDetailsStream(this.wordDetailStream);
             this.dictionary.setArticles(articles);
 
+            MetaInfo metaInfo = new MetaInfo();
+            Languages languages = new Languages();
+            FromLanguage fromLanguage = new FromLanguage();
+            ToLanguage toLanguage = new ToLanguage();
+            fromLanguage.setLang("et");
+            toLanguage.setLang("et");
+            languages.setFromLanguage(fromLanguage);
+            languages.setToLanguage(toLanguage);
+            metaInfo.setLanguages(languages);
+            this.dictionary.setMetaInfo(metaInfo);
+
             ObjectMapper xmlMapper = new XmlMapper().registerModule(new Jdk8Module());
-            String prettyJson = xmlMapper
-                    .writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(this.dictionary);
-            System.out.println(prettyJson);
+            xmlMapper.setPropertyNamingStrategy(new PropertyNamingStrategies.SnakeCaseStrategy());
+            xmlMapper.writeValue(new File("/home/rasmus/ekilex-to-dict/data/realtest.xdxf"), this.dictionary);
+            // ObjectWriter xmlWriter = xmlMapper.writer(new DefaultPrettyPrinter());
+            // xmlWriter.writeValue(new
+            // JsonGenerator("/home/rasmus/ekilex-to-dict/data/realtest.xdxf"),
+            // this.dictionary);
+            // String prettyJson = xmlMapper
+            // .writerWithDefaultPrettyPrinter()
+            // .writeValueAsString(this.dictionary);
+            // System.out.println(prettyJson);
 
         } catch (Exception e) {
             e.printStackTrace();

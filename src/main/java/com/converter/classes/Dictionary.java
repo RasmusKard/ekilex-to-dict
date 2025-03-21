@@ -4,9 +4,11 @@ import java.util.stream.Stream;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName(value = "xdxf")
+@JsonPropertyOrder({ "metaInfo", "articles" })
 public class Dictionary {
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "ar")
