@@ -13,17 +13,13 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import com.eki.dict.classes.Classifier;
 import com.eki.dict.classes.Form;
 import com.eki.dict.classes.Paradigm;
 import com.eki.dict.classes.Usage;
 import com.eki.dict.classes.Word;
 import com.eki.dict.classes.WordDetails;
 import com.eki.dict.classes.WordLexeme;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
@@ -91,14 +87,6 @@ public class DictionaryCreator {
             ObjectMapper xmlMapper = new XmlMapper().registerModule(new Jdk8Module());
             xmlMapper.setPropertyNamingStrategy(new PropertyNamingStrategies.SnakeCaseStrategy());
             xmlMapper.writeValue(new File("/home/rasmus/ekilex-to-dict/data/realtest.xdxf"), this.dictionary);
-            // ObjectWriter xmlWriter = xmlMapper.writer(new DefaultPrettyPrinter());
-            // xmlWriter.writeValue(new
-            // JsonGenerator("/home/rasmus/ekilex-to-dict/data/realtest.xdxf"),
-            // this.dictionary);
-            // String prettyJson = xmlMapper
-            // .writerWithDefaultPrettyPrinter()
-            // .writeValueAsString(this.dictionary);
-            // System.out.println(prettyJson);
 
         } catch (Exception e) {
             e.printStackTrace();

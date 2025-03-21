@@ -1,7 +1,5 @@
 package com.converter.classes;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-
 public class MetaInfo {
     private Languages languages;
 
