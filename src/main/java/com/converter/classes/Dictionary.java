@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @JsonRootName(value = "xdxf")
 @JsonPropertyOrder({ "metaInfo", "articles" })
 public class Dictionary {
-    @JacksonXmlElementWrapper(useWrapping = false)
+    @JacksonXmlElementWrapper(localName = "lexicon")
     @JacksonXmlProperty(localName = "ar")
     private Stream<Article> articles;
 

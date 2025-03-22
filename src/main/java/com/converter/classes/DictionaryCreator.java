@@ -86,7 +86,7 @@ public class DictionaryCreator {
 
             ObjectMapper xmlMapper = new XmlMapper().registerModule(new Jdk8Module());
             xmlMapper.setPropertyNamingStrategy(new PropertyNamingStrategies.SnakeCaseStrategy());
-            xmlMapper.writeValue(new File("/home/rasmus/ekilex-to-dict/data/realtest.xdxf"), this.dictionary);
+            xmlMapper.writeValue(new File("/home/rasmus/ekilex-to-dict/data/v1.xdxf"), this.dictionary);
 
         } catch (Exception e) {
             e.printStackTrace();

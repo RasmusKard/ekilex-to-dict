@@ -2,6 +2,8 @@ package com.converter.classes;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
@@ -12,6 +14,7 @@ public class DefinitionBlock {
     @JacksonXmlProperty(localName = "deftext")
     private String meaning;
 
+    @JsonInclude(Include.NON_EMPTY)
     @JacksonXmlElementWrapper(localName = "ex")
     @JacksonXmlProperty(localName = "ex_orig")
     private List<String> usages;
