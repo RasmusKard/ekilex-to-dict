@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -34,6 +37,10 @@ public class Article {
             forms.remove(this.wordValue);
         }
         forms.addFirst(this.wordValue);
+
+        // clean faulty data of word forms
+        List<String> elementsToRemove = new ArrayList<String>(Arrays.asList("", "-"));
+        forms.removeAll(elementsToRemove);
 
         return forms;
     }
