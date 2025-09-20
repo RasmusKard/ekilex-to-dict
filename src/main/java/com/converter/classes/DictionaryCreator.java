@@ -66,7 +66,7 @@ public class DictionaryCreator {
 
     }
 
-    public void createDictionary() {
+    public void createDictionary(String resultPath) {
 
         try {
 
@@ -86,7 +86,11 @@ public class DictionaryCreator {
 
             ObjectMapper xmlMapper = new XmlMapper().registerModule(new Jdk8Module());
             xmlMapper.setPropertyNamingStrategy(new PropertyNamingStrategies.SnakeCaseStrategy());
-            xmlMapper.writeValue(new File("/home/rasmus/ekilex-to-dict/data/v1.xdxf"), this.dictionary);
+
+            File resultFile = new File(resultPath);
+            resultFile.createNewFile();
+
+            xmlMapper.writeValue(resultFile, this.dictionary);
 
         } catch (Exception e) {
             e.printStackTrace();
