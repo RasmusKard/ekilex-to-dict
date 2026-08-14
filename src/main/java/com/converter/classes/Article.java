@@ -36,7 +36,10 @@ public class Article {
         if (forms.contains(this.wordValue)) {
             forms.remove(this.wordValue);
         }
-        forms.addFirst(this.wordValue);
+        LinkedHashSet<String> newForms = new LinkedHashSet<>();
+        newForms.add(this.wordValue);
+        newForms.addAll(forms);
+        forms = newForms;
 
         // clean faulty data of word forms
         List<String> elementsToRemove = new ArrayList<String>(Arrays.asList("", "-"));
