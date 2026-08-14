@@ -2,3 +2,6 @@ info
 data
 target
 .vscode
+result.xdxf
+kindle-dict
+dependency-reduced-pom.xml
