@@ -66,12 +66,23 @@ public class DictionaryCreator {
 
     }
 
+    private List<Article> buildArticles() {
+        return createArticleStreamfromWordDetailsStream(this.wordDetailStream).toList();
+    }
+
+    public void createKindleDictionarySource(String outputDirPath) {
+        try {
+            new KindleDictionaryWriter("estonian", "et", "et").write(buildArticles(), Paths.get(outputDirPath));
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
     public void createDictionary(String resultPath) {
 
         try {
 
-            Stream<Article> articles = createArticleStreamfromWordDetailsStream(this.wordDetailStream);
-            this.dictionary.setArticles(articles);
+            this.dictionary.setArticles(buildArticles().stream());
 
             MetaInfo metaInfo = new MetaInfo();
             Languages languages = new Languages();

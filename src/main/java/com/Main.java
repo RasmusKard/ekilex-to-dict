@@ -5,11 +5,15 @@ import com.converter.classes.DictionaryCreator;
 public class Main {
 
     public static void main(String[] args) {
-        String resultFilePath = "";
-        String inputJsonDirPath = "";
+        String format = args.length > 0 ? args[0] : "xdxf";
+        String inputJsonDirPath = "/Users/rasmus.kard/ekilex-to-dict/data";
 
         DictionaryCreator dictionaryCreator = new DictionaryCreator(inputJsonDirPath);
 
-        dictionaryCreator.createDictionary(resultFilePath);
+        switch (format) {
+            case "xdxf" -> dictionaryCreator.createDictionary("result.xdxf");
+            case "mobi" -> dictionaryCreator.createKindleDictionarySource("kindle-dict");
+            default -> throw new IllegalArgumentException("Unknown format: " + format + " (expected xdxf or mobi)");
+        }
     }
 }
