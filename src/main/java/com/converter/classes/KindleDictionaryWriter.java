@@ -22,11 +22,19 @@ public class KindleDictionaryWriter {
     private final String indexName;
     private final String inLanguage;
     private final String outLanguage;
+    private final String title;
+    private final String identifier;
 
-    public KindleDictionaryWriter(String indexName, String inLanguage, String outLanguage) {
+    public KindleDictionaryWriter(String indexName, String inLanguage, String outLanguage, String version) {
         this.indexName = indexName;
         this.inLanguage = inLanguage;
         this.outLanguage = outLanguage;
+        this.title = version == null || version.isBlank()
+                ? "Estonian Dictionary"
+                : "Estonian Dictionary v" + version;
+        this.identifier = version == null || version.isBlank()
+                ? "ekilex-to-dict"
+                : "ekilex-to-dict-v" + version;
     }
 
     public void write(List<Article> articles, Path outputDir) throws IOException {
@@ -157,9 +165,9 @@ public class KindleDictionaryWriter {
                 "<package xmlns=\"http://www.idpf.org/2007/opf\" unique-identifier=\"BookId\" version=\"2.0\">\n" +
                 "<metadata xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:opf=\"http://www.idpf.org/2007/opf\">\n"
                 +
-                "<dc:title>Estonian Dictionary</dc:title>\n" +
+                "<dc:title>" + title + "</dc:title>\n" +
                 "<dc:language>" + inLanguage + "</dc:language>\n" +
-                "<dc:identifier id=\"BookId\">ekilex-to-dict</dc:identifier>\n" +
+                "<dc:identifier id=\"BookId\">" + identifier + "</dc:identifier>\n" +
                 "<meta name=\"cover\" content=\"cover-image\"/>\n" +
                 "<x-metadata>\n" +
                 "<DictionaryInLanguage>" + inLanguage + "</DictionaryInLanguage>\n" +
@@ -187,9 +195,9 @@ public class KindleDictionaryWriter {
         String ncx = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<ncx xmlns=\"http://www.daisy.org/z3986/2005/ncx/\" version=\"2005-1\">\n" +
                 "<head>\n" +
-                "<meta name=\"dtb:uid\" content=\"ekilex-to-dict\"/>\n" +
+                "<meta name=\"dtb:uid\" content=\"" + identifier + "\"/>\n" +
                 "</head>\n" +
-                "<docTitle><text>Estonian Dictionary</text></docTitle>\n" +
+                "<docTitle><text>" + title + "</text></docTitle>\n" +
                 "<navMap>\n" +
                 "<navPoint id=\"navpoint-1\" playOrder=\"1\">\n" +
                 "<navLabel><text>Dictionary</text></navLabel>\n" +

@@ -70,9 +70,9 @@ public class DictionaryCreator {
         return createArticleStreamfromWordDetailsStream(this.wordDetailStream).toList();
     }
 
-    public void createKindleDictionarySource(String outputDirPath) {
+    public void createKindleDictionarySource(String outputDirPath, String version) {
         try {
-            new KindleDictionaryWriter("estonian", "et", "et").write(buildArticles(), Paths.get(outputDirPath));
+            new KindleDictionaryWriter("estonian", "et", "et", version).write(buildArticles(), Paths.get(outputDirPath));
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
